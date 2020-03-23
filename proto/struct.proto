@@ -1,0 +1,33 @@
+syntax="proto2";
+message ServerInfo {
+    required int32 type = 1;
+    required string id = 2;
+    required string ip = 3;
+    required int32 port = 4;
+    optional int32 status = 5;
+    optional int32 health_grade = 6;
+    optional int32 active_time = 7;
+}
+
+message HeartbeatInfo {
+    required string id = 1;
+    required int32 type = 2;
+    optional int32 health_grade = 3;
+    optional int32 active_time = 4;
+}
+
+message ServerInfoList {
+    repeated ServerInfo server_info = 1;
+}
+
+enum RaftTaskType {
+    UNKNOWN = 0;
+    RIGISTER = 1; 
+    HEARTBEAT = 2; 
+}
+
+message RaftMessage {
+    required RaftTaskType type = 1;
+    repeated ServerInfo server_info = 2;
+    repeated HeartbeatInfo heartbeat_info = 3;
+}

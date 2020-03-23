@@ -1,0 +1,18 @@
+syntax="proto2";
+import "struct.proto";
+package query;
+option cc_generic_services = true;
+
+message queryServerReq {
+    required int32 type = 1;
+};
+
+message queryServerRes {
+    required int32 ret = 1;
+    optional string redirect = 2;
+    repeated ServerInfo server_info = 3;
+}
+
+service queryService {
+    rpc queryServer(queryServerReq) returns (queryServerRes);
+};

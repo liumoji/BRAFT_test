@@ -1,0 +1,32 @@
+syntax="proto2";
+package report;
+option cc_generic_services = true;
+
+message registerReq {
+    required int32 type = 1;
+    optional int32 status = 2;
+    optional int32 health_grade = 3;
+};
+
+message registerRes {
+    required int32 ret = 1;
+    optional string redirect = 2;
+    optional string id = 3;
+    
+};
+
+message heartbeatReq{
+    required string id = 1;
+    required int32 type = 2;
+    required int32 health_grade = 3;
+
+}
+message heartbeatRes{
+    required int32 ret = 1;
+    optional string redirect = 2;
+}
+
+service reportService {
+    rpc rigister(registerReq) returns (registerRes);
+    rpc heartbeat(heartbeatReq) returns (heartbeatRes);
+};
